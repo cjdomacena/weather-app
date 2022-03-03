@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const useLocation = () => {
   const [location, setLocation] = useState({
     loaded: false,
-    coordinates: { lat: 40.71455, lang: -74.007118 },
+    coordinates: { lat: 40.71455, lon: -74.007118 },
   });
 
   const onSuccess = (loc) => {
@@ -12,7 +12,7 @@ const useLocation = () => {
       loaded: true,
       coordinates: {
         lat: loc.coords.latitude,
-        lng: loc.coords.longitude,
+        lon: loc.coords.longitude,
       },
     });
   };
@@ -34,7 +34,23 @@ const useLocation = () => {
         message: "Geolocation not supported.",
       });
     }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+      if (result.state === "granted") {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+          enableHighAccuracy: true,
+        });
+      }
+
+      // eslint-disable-next-line no-param-reassign
+      result.onchange = function () {
+        if (result.state !== "granted") {
+          setLocation({
+            loaded: false,
+            coordinates: { lat: 40.71455, lon: -74.007118 },
+          });
+        }
+      };
+    });
   }, []);
 
   return location;
