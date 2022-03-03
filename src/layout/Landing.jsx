@@ -3,7 +3,7 @@ import RightSection from "./RightSection";
 
 function Landing() {
   return (
-    <main className="block xl:flex lg:flex md:flex sm:block xs:block">
+    <main className="block xl:flex lg:flex">
       <LeftSection />
       <RightSection />
     </main>
