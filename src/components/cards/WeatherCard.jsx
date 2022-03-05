@@ -8,10 +8,6 @@ function isNight() {
   return true;
 }
 
-function convertTemp(temp, type) {
-  if (type === "celcius") return `${Math.floor(300 - temp)}°`;
-  return `${Math.floor((300 - temp) * 1.8)}°`;
-}
 function WeatherCard({ props }) {
   const { dt, temp, weather } = props;
   const tomorrow = new Date();
@@ -34,9 +30,7 @@ function WeatherCard({ props }) {
 
         <div className="flex justify-between mt-4">
           <p className="font-bold text-lg">
-            {isNight()
-              ? convertTemp(temp.day, "celcius")
-              : convertTemp(temp.night, "celcius")}
+            {isNight() ? temp.day : temp.night}
           </p>{" "}
           <p>13C</p>
         </div>

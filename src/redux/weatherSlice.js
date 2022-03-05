@@ -7,6 +7,7 @@ const weatherSlice = createSlice({
     pending: false,
     error: false,
     data: {},
+    units: "imperial",
   },
   reducers: {
     getForecastStart: (state) => {
@@ -20,9 +21,16 @@ const weatherSlice = createSlice({
       state.pending = false;
       state.error = true;
     },
+    getUnits: (state) => {
+      state.units = state.units === "metric" ? "imperial" : "metric";
+    },
   },
 });
 
-export const { getForecastStart, getForecastSuccess, getForecastError } =
-  weatherSlice.actions;
+export const {
+  getForecastStart,
+  getForecastSuccess,
+  getForecastError,
+  getUnits,
+} = weatherSlice.actions;
 export default weatherSlice.reducer;
