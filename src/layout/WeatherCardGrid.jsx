@@ -8,7 +8,7 @@ function WeatherCardGrid() {
     <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(144px,1fr))] gap-8">
       {data.daily &&
         data.daily.map((weatherInfo, index) =>
-          index > 1 && index < 7 ? (
+          index > 0 && index < 6 ? (
             // eslint-disable-next-line react/no-array-index-key
             <WeatherCard key={index} props={weatherInfo} />
           ) : (
