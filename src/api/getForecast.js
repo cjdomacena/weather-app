@@ -6,7 +6,6 @@ import {
 } from "../redux/weatherSlice";
 
 const getForecast = async ({ ...props }, dispatch) => {
-  console.log(props);
   const baseURL = "https://api.openweathermap.org/data/2.5/onecall";
   dispatch(getForecastStart());
   try {
