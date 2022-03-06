@@ -5,7 +5,7 @@ import {
 } from "../redux/locationSlice";
 
 const getLocationName = async ({ ...props }, dispatch) => {
-  const baseURL = "http://api.openweathermap.org/geo/1.0/";
+  const baseURL = "http://api.openweathermap.org/geo/1.0";
   dispatch(getLocationStart());
   try {
     const req = await fetch(

@@ -6,7 +6,7 @@ const locationSlice = createSlice({
   initialState: {
     pending: false,
     error: false,
-    data: {},
+    data: [{ name: "New York" }],
   },
   reducers: {
     getLocationStart: (state) => {

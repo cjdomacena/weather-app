@@ -15,6 +15,7 @@ function WeatherCard({ props }) {
   const tomorrow = new Date();
   return (
     <div className=" w-full h-auto bg-slate-900 shadow shadow-slate-900">
+      {console.log(units)}
       <div className="px-6 py-4 text-slate-100 h-full flex flex-col justify-between item">
         {pending ? (
           <div className="bg-slate-800 h-2 animate-pulse" />

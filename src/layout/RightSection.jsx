@@ -1,43 +1,16 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import getForecast from "../api/getForecast";
+import { useSelector } from "react-redux";
 import TempButtons from "../components/buttons/TempButtons";
 import LargeCard from "../components/cards/LargeCard";
 import SmallCard from "../components/cards/SmallCard";
-import { getUnits } from "../redux/weatherSlice";
 import WeatherCardGrid from "./WeatherCardGrid";
 
 function RightSection() {
-  const [isCelcius, setIsCelsius] = useState(true);
   const { data } = useSelector((state) => state.forecast);
-
-  const dispatch = useDispatch();
-  function changeUnits(unit) {
-    // eslint-disable-next-line no-unneeded-ternary
-    setIsCelsius(unit === "metric" ? true : false);
-    dispatch(getUnits(unit));
-    getForecast({ lat: data.lat, lon: data.lon }, dispatch, unit);
-  }
 
   return (
     <section className="xl:w-3/4 lg:w-3/4 md:screen sm:w-screen xs:w-screen min-h-screen">
       <div className="p-4 flex justify-end gap-4 items-center">
-        <button
-          type="button"
-          onClick={() => {
-            changeUnits("metric");
-          }}
-        >
-          <TempButtons isActive={isCelcius && true} tempType="celsius" />
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            changeUnits("imperial");
-          }}
-        >
-          <TempButtons isActive={!isCelcius && true} tempType="farenheit" />
-        </button>
+        <TempButtons />
       </div>
       <div className="w-10/12 mx-auto">
         <div>

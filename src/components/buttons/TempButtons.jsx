@@ -1,34 +1,37 @@
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import getForecast from "../../api/getForecast";
+import { getUnits } from "../../redux/weatherSlice";
 
-export default function TempButtons({ isActive, tempType }) {
-  if (tempType === "farenheit") {
-    return (
-      <div
+export default function TempButtons() {
+  const { data, units } = useSelector((state) => state.forecast);
+  const dispatch = useDispatch();
+
+  function changeUnit(unit) {
+    dispatch(getUnits(unit));
+    getForecast({ lat: data.lat, lon: data.lon }, dispatch, unit);
+  }
+
+  return (
+    <>
+      {console.log("rendered")}
+      <button
         className={` h-12 w-12 ${
-          isActive ? "bg-slate-100" : "bg-slate-400 text-slate-100"
+          units === "imperial" ? "bg-slate-100" : "bg-slate-400 text-slate-100"
         } rounded-full grid place-items-center transition-colors`}
+        type="button"
+        onClick={() => changeUnit("metric")}
       >
         <h2 className="font-bold text-xl mr-1 text-slate-900">°F</h2>
-      </div>
-    );
-  }
-  return (
-    <div
-      className={` h-12 w-12 ${
-        isActive ? "bg-slate-100" : "bg-slate-400 "
-      } rounded-full grid place-items-center transition-colors`}
-    >
-      <h2 className="font-bold text-xl mr-1 text-slate-900">°C</h2>
-    </div>
+      </button>
+      <button
+        className={` h-12 w-12 ${
+          units === "metric" ? "bg-slate-100" : "bg-slate-400 text-slate-100"
+        } rounded-full grid place-items-center transition-colors`}
+        type="button"
+        onClick={() => changeUnit("imperial")}
+      >
+        <h2 className="font-bold text-xl mr-1 text-slate-900">°C</h2>
+      </button>
+    </>
   );
 }
-
-TempButtons.propTypes = {
-  isActive: PropTypes.bool,
-  tempType: PropTypes.string,
-};
-
-TempButtons.defaultProps = {
-  isActive: true,
-  tempType: "celsius",
-};

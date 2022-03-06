@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Landing from "./layout/Landing";
 import useLocation from "./hooks/useLocation";
 import getForecast from "./api/getForecast";
-import getLocationName from "./api/getLocationName";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { units } = useSelector((state) => state.forecast);
+  const { units, pending, error } = useSelector((state) => state.forecast);
 
   useEffect(() => {
     getForecast({ ...location.coordinates }, dispatch, units);
-    getLocationName({ ...location.coordinates }, dispatch);
-  }, []);
+  }, [dispatch]);
+
+  if (pending) {
+    return <h1>Loading</h1>;
+  }
+  if (error) {
+    return <h1>Oops.. Something went wrong..</h1>;
+  }
   return (
     <div className="App text-white relative">
       <Landing />
