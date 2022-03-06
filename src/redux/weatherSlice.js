@@ -21,8 +21,8 @@ const weatherSlice = createSlice({
       state.pending = false;
       state.error = true;
     },
-    getUnits: (state) => {
-      state.units = state.units === "imperial" ? "metric" : "imperial";
+    getUnits: (state, action) => {
+      state.units = action.payload;
     },
   },
 });

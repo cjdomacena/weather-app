@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     getForecast({ ...location.coordinates }, dispatch, units);
-  }, [units]);
+  }, []);
   return (
     <div className="App text-white relative">
       <Landing />
