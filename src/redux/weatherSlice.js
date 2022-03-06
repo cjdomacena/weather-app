@@ -7,7 +7,7 @@ const weatherSlice = createSlice({
     pending: false,
     error: false,
     data: {},
-    units: "imperial",
+    units: "metric",
   },
   reducers: {
     getForecastStart: (state) => {
@@ -22,7 +22,7 @@ const weatherSlice = createSlice({
       state.error = true;
     },
     getUnits: (state) => {
-      state.units = state.units === "metric" ? "imperial" : "metric";
+      state.units = state.units === "imperial" ? "metric" : "imperial";
     },
   },
 });
