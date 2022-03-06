@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Landing from "./layout/Landing";
 import useLocation from "./hooks/useLocation";
 import getForecast from "./api/getForecast";
+import getLocationName from "./api/getLocationName";
 
 function App() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function App() {
 
   useEffect(() => {
     getForecast({ ...location.coordinates }, dispatch, units);
+    getLocationName({ ...location.coordinates }, dispatch);
   }, []);
   return (
     <div className="App text-white relative">

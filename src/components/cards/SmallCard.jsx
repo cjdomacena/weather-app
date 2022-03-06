@@ -12,16 +12,19 @@ function SmallCard({ title }) {
           {title.toLowerCase() === "visibility" ? (
             <>
               <span className="text-7xl font-medium">
-                {(current.visibility * 0.000621371192)
-                  .toFixed(2)
-                  .toString()
-                  .replace(".", ",")}
+                {current &&
+                  (current.visibility * 0.000621371192)
+                    .toFixed(2)
+                    .toString()
+                    .replace(".", ",")}
               </span>{" "}
               miles
             </>
           ) : (
             <>
-              <span className="text-7xl font-medium">{current.pressure}</span>{" "}
+              <span className="text-7xl font-medium">
+                {current && current.pressure}
+              </span>{" "}
               mb
             </>
           )}

@@ -9,8 +9,7 @@ function WeatherCardGrid() {
       {data.daily &&
         data.daily.map((weatherInfo, index) =>
           index > 0 && index < 6 ? (
-            // eslint-disable-next-line react/no-array-index-key
-            <WeatherCard key={index} props={weatherInfo} />
+            <WeatherCard key={weatherInfo.dt} props={weatherInfo} />
           ) : (
             ""
           )
