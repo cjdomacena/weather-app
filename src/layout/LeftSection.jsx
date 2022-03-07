@@ -1,43 +1,23 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import cloudBG from "../assets/img/Cloud-background.png";
-import getLocationName from "../api/getLocationName";
+
+import SearchBar from "../components/search/SearchBar";
 
 function LeftSection() {
   const { data, units, pending } = useSelector((state) => state.forecast);
-  const dispatch = useDispatch();
-  const { pending: locPending } = useSelector((state) => state.location);
+  const { pending: locPending, data: locData } = useSelector(
+    (state) => state.location
+  );
 
   if (pending || locPending) {
     <section className="xl:w-1/4 lg:w-1/4 md:screen sm:w-screen xs:w-screen shadow bg-slate-900 relative p-4">
       <Loader />
     </section>;
   }
-
-  useEffect(() => {
-    if (data) getLocationName({ lat: data.lat, lon: data.lon }, dispatch);
-  }, [dispatch]);
-
   return (
     <section className="xl:w-1/4 lg:w-1/4 md:screen sm:w-screen xs:w-screen shadow bg-slate-900 relative p-4">
       <div className="h-auto absolute top-8 left-0 z-40 bg-slate-800 p-2  rounded w-11/12 right-0 mx-auto">
-        <div className="flex items-center justify-between">
-          <div>search</div>
-          <button
-            type="button"
-            className="bg-slate-600 w-fit p-2 rounded-full shadow shadow-slate-900 h-fit text-slate-100 hover:text-slate-400 hover:bg-slate-700 transition-colors"
-          >
-            <svg
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv w-6 h-6 fill-current"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="MyLocationIcon"
-            >
-              <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
-            </svg>
-          </button>
-        </div>
+        <SearchBar />
       </div>
       {data.current && (
         <div className=" h-[680px] mt-24 relative pt-8">
@@ -108,7 +88,11 @@ function LeftSection() {
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <p>New York</p>
+              {locData.name === undefined ? (
+                <p>(default) New York, New York</p>
+              ) : (
+                <p>{`${locData.name}, ${locData.state}`}</p>
+              )}
             </div>
           </div>
         </div>

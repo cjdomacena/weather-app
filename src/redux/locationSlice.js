@@ -6,7 +6,8 @@ const locationSlice = createSlice({
   initialState: {
     pending: false,
     error: false,
-    data: [{ name: "New York" }],
+    data: {},
+    search: [],
   },
   reducers: {
     getLocationStart: (state) => {
@@ -16,6 +17,10 @@ const locationSlice = createSlice({
       state.pending = false;
       state.data = action.payload;
     },
+    getSearchSuccess: (state, action) => {
+      state.pending = false;
+      state.search = action.payload;
+    },
     getLocationError: (state) => {
       state.pending = false;
       state.error = true;
@@ -23,6 +28,10 @@ const locationSlice = createSlice({
   },
 });
 
-export const { getLocationStart, getLocationSucess, getLocationError } =
-  locationSlice.actions;
+export const {
+  getLocationStart,
+  getLocationSucess,
+  getLocationError,
+  getSearchSuccess,
+} = locationSlice.actions;
 export default locationSlice.reducer;
