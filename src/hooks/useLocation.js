@@ -29,9 +29,9 @@ const useLocation = () => {
 
   useEffect(() => {
     if (!("geolocation" in navigator)) {
-      onError({
-        code: 0,
-        message: "Geolocation not supported.",
+      setLocation({
+        loaded: false,
+        coordinates: { lat: 40.71455, lon: -74.007118 },
       });
     }
     navigator.permissions.query({ name: "geolocation" }).then((result) => {
