@@ -12,7 +12,9 @@ const getForecast = async ({ ...props }, dispatch, unit) => {
       `${baseURL}?lat=${props.lat}&lon=${props.lon}&exclude=hourly,alerts,minutely&units=${unit}&appid=${process.env.REACT_APP_OPEN_WEATHER}`
     );
     const res = await req.json();
-    dispatch(getForecastSuccess(res));
+    setTimeout(() => {
+      dispatch(getForecastSuccess(res));
+    }, 1000);
   } catch (error) {
     dispatch(getForecastError());
   }

@@ -11,7 +11,6 @@ const getLocationName = async ({ ...props }, dispatch) => {
     const req = await fetch(
       `${baseURL}/reverse?lat=${props.lat}&lon=${props.lon}&limit=5&appid=${process.env.REACT_APP_OPEN_WEATHER}`
     );
-
     const res = await req.json();
     dispatch(getLocationSucess(res));
   } catch (error) {

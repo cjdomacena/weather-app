@@ -51,7 +51,7 @@ const useLocation = () => {
         }
       };
     });
-  }, []);
+  }, [location.coordinates.lat, location.coordinates.lon]);
 
   return location;
 };

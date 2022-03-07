@@ -42,19 +42,35 @@ function LeftSection() {
       {data.current && (
         <div className=" h-[680px] mt-24 relative pt-8">
           <div className="flex flex-col items-center gap-y-24 px-8 h-96 justify-between">
-            <img
-              src={`http://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png`}
-              alt={data.current.weather[0].description}
-              className="w-48 h-auto"
-            />
-            <h1 className=" text-6xl font-bold text-center">
+            <div className="text-center">
+              <img
+                src={`https://openweathermap.org/img/wn/${data.current.weather[0].icon}@4x.png`}
+                alt={data.current.weather[0].description}
+                className="w-48 h-auto"
+              />
+              <h4 className=" text-2xl font-medium">
+                {data.current.weather[0].main}
+              </h4>
+            </div>
+
+            <h1
+              className={`text-6xl font-bold text-center  ${
+                pending && "hidden"
+              }`}
+            >
               {units === "metric"
                 ? `${data.current.temp}°C`
                 : `${data.current.temp}°F`}
             </h1>
-            <h4 className=" text-2xl font-medium">
-              {data.current.weather[0].main}
-            </h4>
+            <div
+              className={`${
+                pending
+                  ? "block absolute left-0 right-0 top-0 bottom-0"
+                  : "hidden"
+              }`}
+            >
+              <Loader />
+            </div>
           </div>
           <div className="absolute left-0 right-0 bottom-0 mx-auto text-center">
             <div className="mx-auto text-center">

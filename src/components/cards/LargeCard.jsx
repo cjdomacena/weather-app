@@ -9,11 +9,12 @@ function LargeCard({ title, data }) {
           {title.toLowerCase() !== "humidity" ? (
             <>
               <span className=" text-7xl font-medium">{data.wind_speed}</span>{" "}
-              mph
+              <span className="text-base">mph</span>
             </>
           ) : (
             <>
-              <span className=" text-7xl font-medium">{data.humidity}</span> %
+              <span className=" text-7xl font-medium">{data.humidity}</span>
+              <span className="text-base">%</span>
             </>
           )}
         </h2>

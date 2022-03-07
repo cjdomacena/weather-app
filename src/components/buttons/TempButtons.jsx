@@ -16,21 +16,25 @@ export default function TempButtons() {
       {console.log("rendered")}
       <button
         className={` h-12 w-12 ${
-          units === "imperial" ? "bg-slate-100" : "bg-slate-400 text-slate-100"
+          units === "metric"
+            ? "bg-slate-100 text-slate-900"
+            : "bg-slate-400 text-slate-900"
         } rounded-full grid place-items-center transition-colors`}
         type="button"
         onClick={() => changeUnit("metric")}
       >
-        <h2 className="font-bold text-xl mr-1 text-slate-900">°F</h2>
+        <h2 className="font-bold text-xl mr-1 text-slate-900">°C</h2>
       </button>
       <button
         className={` h-12 w-12 ${
-          units === "metric" ? "bg-slate-100" : "bg-slate-400 text-slate-100"
+          units !== "metric"
+            ? "bg-slate-100 text-slate-900"
+            : "bg-slate-400 text-slate-900"
         } rounded-full grid place-items-center transition-colors`}
         type="button"
         onClick={() => changeUnit("imperial")}
       >
-        <h2 className="font-bold text-xl mr-1 text-slate-900">°C</h2>
+        <h2 className="font-bold text-xl mr-1 text-slate-900">°F</h2>
       </button>
     </>
   );

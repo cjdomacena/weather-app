@@ -7,17 +7,20 @@ import getForecast from "./api/getForecast";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { units, pending, error } = useSelector((state) => state.forecast);
+  const { units, error } = useSelector((state) => state.forecast);
 
   useEffect(() => {
     getForecast({ ...location.coordinates }, dispatch, units);
   }, [dispatch]);
 
-  if (pending) {
-    return <h1>Loading</h1>;
-  }
   if (error) {
-    return <h1>Oops.. Something went wrong..</h1>;
+    return (
+      <div className="w-full h-screen grid place-items-center text-center">
+        <h1 className="text-slate-100 text-2xl font-medium">
+          Oops.. Something went wrong.. Try to refresh the page.
+        </h1>
+      </div>
+    );
   }
   return (
     <div className="App text-white relative">
