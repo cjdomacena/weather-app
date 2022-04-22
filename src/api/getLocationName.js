@@ -5,7 +5,7 @@ import {
   getSearchSuccess,
 } from "../redux/locationSlice";
 
-const baseURL = "http://api.openweathermap.org/geo/1.0";
+const baseURL = "https://api.openweathermap.org/geo/1.0";
 const getLocationName = async ({ ...props }, dispatch) => {
   dispatch(getLocationStart());
   try {
